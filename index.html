@@ -1,104 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="he" dir="rtl">
-    <head>
-        <title>מי הכי גיי</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="השאלה עתיקת היומית סוף סוף נענתה">
-        <meta property="og:title" content="מי הכי גיי">
-        <meta property="og:description" content="השאלה עתיקת היומית סוף סוף נענתה">
-        <meta property="og:image" itemprop="image" content="https://media.discordapp.net/attachments/1030876728232513619/1517533147883901099/image.png?ex=6a36a060&is=6a354ee0&hm=07068f75df305986a86eb2e84385ecb845455b90153fd79fdad5bc19f4b95c3e&=&format=webp&quality=lossless">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://hatzilu.github.io/gaydar">
+  <head>
+    <title>מי הכי גיי</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="השאלה עתיקת היומית סוף סוף נענתה" />
+    <meta property="og:title" content="מי הכי גיי" />
+    <meta
+      property="og:description"
+      content="השאלה עתיקת היומית סוף סוף נענתה"
+    />
+    <meta
+      property="og:image"
+      itemprop="image"
+      content="https://media.discordapp.net/attachments/1030876728232513619/1517533147883901099/image.png?ex=6a36a060&is=6a354ee0&hm=07068f75df305986a86eb2e84385ecb845455b90153fd79fdad5bc19f4b95c3e&=&format=webp&quality=lossless"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hatzilu.github.io/gaydar" />
+  </head>
+  <style>
+    .entry {
+      transition: transform 0.2s ease-out;
+    }
+    .entry:hover {
+      transform: scale(1.1);
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family:
+        Segoe UI,
+        sans-serif;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    label {
+      font-size: 2rem;
+    }
+    input[type="range"] {
+      width: 300px;
+    }
+    datalist {
+      display: flex;
+      flex-direction: column-reverse;
+      direction: rtl;
+      justify-content: space-between;
+      writing-mode: vertical-lr;
+      width: 300px;
+    }
+    option {
+      padding: 0;
+    }
 
-    </head>
-    <style>
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f1f1f1;
+      padding-block: 1rem;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+  <body>
+    <main>
+      <h1>מי הכי גיי?</h1>
+      <datalist id="markers">
+        <option value="0" label="לגמרי סטרייט">לגמרי סטרייט</option>
+        <option value="5" label="די סאס אחי">די סאס אחי</option>
+        <option value="10" label="גיי אחושלוקינג">גיי אחושלוקינג</option>
+      </datalist>
+      <template>
+        <!-- <img src="" id="pfp" alt=""/> -->
+        <section class="entry">
+          <label for="range">zשם:</label>
+          <input
+            name="range"
+            type="range"
+            min="0"
+            max="10"
+            disabled
+            list="markers"
+          />
+          <output for="range">0</output>
+        </section>
+      </template>
+    </main>
+    <footer>
+      <form>
+        <label for="textarea">המידע נראה שגוי? דווח לנו!</label>
+        <textarea name="textarea" id="textarea" cols="30" rows="10"> </textarea>
+        <button type="submit">שלח</button>
+      </form>
+    </footer>
+    <script type="module">
+      const NAMES = ["דור", "רועי", "ינאי", "איתמר", "עמרי"];
+      const template = document.querySelector("template");
 
-        .entry {
-            transition: transform 0.2s ease-out;
-        }
-        .entry:hover {
-            transform: scale(1.1);
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Segoe UI, sans-serif;
-        }
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        label {
-            font-size: 2rem;
-        }
-        input[type="range"] {
-            width: 300px;
-        }
+      NAMES.forEach((name) => {
+        const clone = document.importNode(template.content, true);
+        const label = clone.querySelector("label");
+        label.textContent = name;
+        const input = clone.querySelector("input");
+        input.value = `${Math.random() * 10}`;
+        const output = clone.querySelector("output");
+        output.textContent = input.value;
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f1f1f1;
-            padding-block: 1rem;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        </style>
-    <body>
-        <main>
-            <h1>מי הכי גיי?</h1>
-            <template>
-                <!-- <img src="" id="pfp" alt=""/> -->
-                <section class="entry">
-                    
-                    <label for="range">zשם:</label>
-                    <input name="range" type="range" min="0" max="10" disabled />
-                    <output for="range">0</output>
-                </section>
-            </template>
-        </main>
-        <footer>
-            <form>
-                <label for="textarea">המידע נראה שגוי? דווח לנו!</label>
-                <textarea name="textarea" id="textarea" cols="30" rows="10">
-                </textarea>
-                <button type="submit">שלח</button>
-            </form>
-        </footer>
-        <script type="module">
-            const NAMES = ["דור", "רועי", "ינאי", "איתמר", "עמרי"];
-            const template = document.querySelector("template");
-
-            NAMES.forEach(name => {
-                const clone = document.importNode(template.content, true);
-                const label = clone.querySelector("label");
-                label.textContent = name;
-                const input = clone.querySelector("input");
-                input.value = `${Math.random() * 10}`;
-                const output = clone.querySelector("output");
-                output.textContent = input.value;
-
-                document.querySelector("main").appendChild(clone);
-            });
-            function handleSubmit(event) {
-                event.preventDefault();
-                console.log('gay')
-                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-            }
-            const form = document.querySelector("form");
-            form.addEventListener("submit", handleSubmit); 
-        </script>
-    </body>
+        document.querySelector("main").appendChild(clone);
+      });
+      function handleSubmit(event) {
+        event.preventDefault();
+        console.log("gay");
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }
+      const form = document.querySelector("form");
+      form.addEventListener("submit", handleSubmit);
+    </script>
+  </body>
 </html>
