@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="he" dir="rtl">
+    <head>
+        <title>מי הכי גיי</title>
+    </head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Segoe UI, sans-serif;
+            gap: 1rem;
+        }
+        label {
+            font-size: 2rem;
+        }
+        input[type="range"] {
+            width: 300px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 1rem;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        </style>
+    <body>
+        <template>
+            <!-- <img src="" id="pfp" alt=""/> -->
+             <section>
+
+                 <label for="range">zשם:</label>
+                 <input name="range" type="range" min="0" max="10" readonly disabled />
+                 <output for="range">0</output>
+                </section>
+        </template>
+        <footer>
+            <form>
+                <label for="textarea">המידע נראה שגוי? דווח לנו!</label>
+                <textarea name="textarea" id="textarea" cols="30" rows="10">
+                </textarea>
+                <button type="submit">שלח</button>
+            </form>
+        </footer>
+        <script type="module">
+            const NAMES = ["דור", "רועי", "ינאי", "איתמר", "עמרי"];
+            const template = document.querySelector("template");
+
+            NAMES.forEach(name => {
+                const clone = document.importNode(template.content, true);
+                const label = clone.querySelector("label");
+                label.textContent = name;
+                const input = clone.querySelector("input");
+                input.value = `${Math.random() * 10}`;
+                const output = clone.querySelector("output");
+                output.textContent = input.value;
+
+                document.body.appendChild(clone);
+            });
+            function handleSubmit(event) {
+                event.preventDefault();
+                console.log('gay')
+                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+            }
+            const form = document.querySelector("form");
+            form.addEventListener("submit", handleSubmit); 
+        </script>
+    </body>
+</html>
