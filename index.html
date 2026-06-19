@@ -10,6 +10,13 @@
         <meta property="og:image" content="https://pbs.twimg.com/media/HH1OUT6bkAAYmDU.jpg">
     </head>
     <style>
+
+        .entry {
+            transition: transform 0.3s ease-out;
+        }
+        .entry:hover {
+            transform: scale(1.1);
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -46,7 +53,7 @@
     <body>
         <template>
             <!-- <img src="" id="pfp" alt=""/> -->
-             <section>
+             <section class="entry">
 
                  <label for="range">zשם:</label>
                  <input name="range" type="range" min="0" max="10" readonly disabled />
